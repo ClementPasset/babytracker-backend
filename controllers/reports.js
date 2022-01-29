@@ -1,7 +1,7 @@
 const Report = require('../models/Reports');
 
 exports.getReports = (req, res, next) => {
-    Report.find()
+    Report.find({ userId: req.params.id })
         .sort([
             ['date', -1]
         ])
@@ -29,4 +29,4 @@ exports.deleteReport = (req, res, next) => {
     Report.deleteOne({ _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Rapport supprimé.' }))
         .catch(error => { res.status(400).json({ error }) });
-}
+};
